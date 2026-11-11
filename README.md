@@ -75,3 +75,13 @@ The 12 original files are retained unchanged privately. The public computational
 | No64_v1.0_PREPRINT.pdf | 383315 | `1ee82a18621b09a2f767f67e4826a03e5e673e437022b78c810d4230e6c60820` |
 | No64_v1.0_SOURCE.tex | 13616 | `a2c366f13ecc7e6c105a483e29a23c26b19cacd98d038c865b5c2cdb4a3f6fc9` |
 | No64_v1.0_REPRODUCIBILITY.zip | 12878 | `a786e2cc18ca1a0b09ad399de14d1d5ab6d679a476b7051b5c7c8cad55b20365` |
+
+## Publication links
+
+- [GitHub repository](https://github.com/yonezaemon1-hub/no64-four-move-subtraction-nimwords)
+- [Release v1.0](https://github.com/yonezaemon1-hub/no64-four-move-subtraction-nimwords/releases/tag/v1.0)
+- [Zenodo Preprint record](https://zenodo.org/records/24134832)
+- [Version DOI: 10.5281/zenodo.24134832](https://doi.org/10.5281/zenodo.24134832)
+- [Concept DOI: 10.5281/zenodo.24134831](https://doi.org/10.5281/zenodo.24134831)
+
+DOI links were added to main after the deposit; v1.0 assets retain the checksums above.
