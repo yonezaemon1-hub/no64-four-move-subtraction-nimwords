@@ -1,0 +1,145 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{enumitem}
+\hypersetup{pdftitle={Complete Nim-Words and Sharp Preperiods for the Four-Move Subtraction Family \{5,11,15,c\}},pdfauthor={Ryutaro Yonezu},pdfsubject={No.64, preprint v1.0; AI-assisted; not human peer-reviewed; NOVELTY INCONCLUSIVE; REFERENCES PARTIAL; All rights reserved},pdfkeywords={subtraction game, Sprague-Grundy, nim-word, preperiod, period}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\mex}{\operatorname{mex}}
+\newcommand{\SG}{\mathcal{G}}
+\newcommand{\word}[1]{\mathtt{#1}}
+\newcommand{\tail}{(\word{01})^{\infty}}
+\title{Complete Nim-Words and Sharp Preperiods for the Four-Move Subtraction Family $\{5,11,15,c\}$}
+\author{Ryutaro Yonezu\\\small Independent Researcher}
+\date{11 November 2026 --- preprint v1.0\\\small Published 11 November 2026; not peer-reviewed}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the normal-play one-pile subtraction game with moves $\{5,11,15,c\}$, $c>15$ odd, we determine the least eventual period and the least preperiod for every admissible $c$. All sufficiently large parameters $c\ge59$ admit a single explicit infinite nim-word $B(01)^{(c-45)/2}0D(01)^\infty$ with two fixed digit blocks of lengths $44$ and $29$, giving the sharp formula $(T,p)=(c+29,2)$. The $21$ remaining odd values are proved by finite recurrence certificates and include the exceptional pairs $(0,26)$ at $c=21$ and $(36,20)$ at $c=29$. Zhang previously reported the ultimate period-two pattern and exceptional branches as bounded computations for a wider family; those observations are not claimed as new. Historical novelty of the exact all-$c$ statements remains unverified.
+\end{abstract}
+\noindent\textbf{Research status.} No.~64, preprint v1.0; \textbf{Published}. An external AI review, as reported by the author, rated MODEL/PROOF/COMPUTATION/MINIMALITY/PACKAGE PASS. The author-provided Windows PowerShell 5.1 output reports reproducibility PASS; this was not independently witnessed. \textbf{REFERENCES PARTIAL; NOVELTY INCONCLUSIVE}. Human peer review and formal proof verification have not occurred.
+
+\section{Definition and principal result}
+For a finite subtraction set $S\subset\mathbb{Z}_{>0}$ let $g_S(n)$ be the unique sequence given by
+\begin{equation}\label{rec}
+ g_S(n)=\mex\{g_S(n-s):s\in S,\;s\le n\},\qquad \mex\varnothing=0.
+\end{equation}
+An eventual period $p\ge1$ starts at index $T\ge0$ if $g_S(n+p)=g_S(n)$ for every $n\ge T$. We call the smallest possible $p$ the \emph{least eventual period} and the earliest possible starting index the \emph{least preperiod}. For a finite word $W$, write $W^r$ for concatenation and $W^\infty$ for infinite repetition.
+
+Let the following words be indexed from zero:
+\begin{equation}\label{blocks}
+\begin{aligned}
+ B&=\word{00000111110222213333020001011101022101330102}, &&|B|=44,\\
+ D&=\word{12121030301010101010101210103}, &&|D|=29.
+\end{aligned}
+\end{equation}
+\begin{theorem}\label{main}
+Let $c>15$ be odd and put $S_c=\{5,11,15,c\}$.
+\begin{enumerate}[label=\textnormal{(\roman*)}]
+\item For every odd $c\ge59$, the \emph{complete} nim-word is
+\begin{equation}\label{mainword}
+\SG_c=B\,(\word{01})^{(c-45)/2}\,\word{0}\,D\,\tail,
+\end{equation}
+with \emph{least} preperiod $T_c=c+29$ and \emph{least} eventual period $p_c=2$.
+\item For the remaining odd $c\in[17,57]$, the least pairs $(T_c,p_c)$ are those in Table~\ref{smalltable}. The entire infinite word for each case is specified by a finite mex-generated prefix of length $T_c$ followed by the primitive period block of length $p_c$; the enclosed verifier and certificate table list those blocks explicitly.
+\end{enumerate}
+\end{theorem}
+\begin{table}[htb]
+\centering\small
+\begin{tabular}{rrr@{\hspace{10mm}}rrr@{\hspace{10mm}}rrr}
+\toprule
+$c$&$T$&$p$&$c$&$T$&$p$&$c$&$T$&$p$\\\midrule
+17&46&2&19&52&2&21&0&26\\
+23&58&2&25&54&2&27&56&2\\
+29&36&20&31&80&2&33&62&2\\
+35&64&2&37&66&2&39&68&2\\
+41&96&2&43&98&2&45&74&2\\
+47&76&2&49&78&2&51&80&2\\
+53&82&2&55&84&2&57&86&2\\\bottomrule
+\end{tabular}
+\caption{Finite certificate cases; all parameter values $c>15$ below the uniform-word threshold $59$.}\label{smalltable}
+\end{table}
+
+\section{Proof of the uniform infinite family}
+We first record a finite periodic-word criterion.
+\begin{lemma}[Finite recurrence certificate]\label{finite}
+For a proposed infinite word $f$ which is periodic from index $T$ with period $p$, let $s_{\max}=\max S$. If $f$ satisfies the mex recurrence~\eqref{rec} at every index $0\le n\le T+p+s_{\max}-1$, then $f$ satisfies it at every index $n\ge0$.
+\end{lemma}
+\begin{proof}
+Use strong induction. At $n\ge T+p+s_{\max}$ every predecessor of $n-p$ is legal and has index at least $T$. The lists of predecessor values for $n$ and $n-p$ are therefore identical by the periodicity of $f$. Their mex values agree, and the recurrence at $n-p$ gives $f(n-p)=f(n)$, completing the induction.
+\end{proof}
+\begin{lemma}\label{base}
+For the three-move set $S_0=\{5,11,15\}$, one has
+$\SG_{S_0}=B\tail$. In addition,
+\begin{equation}\label{base-invariants}
+\begin{cases}
+g_{S_0}(j)\ne0&\text{for all odd }j\ge29,\\
+g_{S_0}(j)\ne1&\text{for all even }j\ge30.
+\end{cases}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Direct mex evaluation for $0\le n\le60$ agrees with $B\tail$ (a complete integer table is reproducible with the bundled script). Apply Lemma~\ref{finite} with $T=44,p=2,s_{\max}=15$. For the exclusions, check respectively the eight odd indices $29,31,\ldots,43$ and the seven even indices $30,32,\ldots,42$ of $B$; above $43$ the suffix alternates.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{main}(i)]
+Fix odd $c\ge59$ and let $f$ denote the word~\eqref{mainword}. For $n<c$, move $c$ is forbidden and $f(n)=g_{S_0}(n)$, so Lemma~\ref{base} supplies the recurrence.
+
+For $n=c+i$ with $0\le i\le28$, move $c$ produces predecessor $i$, whose value is $B_i$. For each $s\in\{5,11,15\}$, when $i<s$ the index $c+i-s$ lies in $[44,c-1]$ and has value $i\bmod2$ (both $c$ and $s$ are odd). When $i\ge s$ its value is $D_{i-s}$, an earlier entry of the displayed block. Thus the 29 required equations are the $c$-independent finite checks
+\begin{equation}\label{patch}
+ D_i=\mex\left(\{B_i\}\cup\left\{\begin{cases}
+i\bmod2,&i<s,\\
+D_{i-s},&i\ge s
+\end{cases}:s\in\{5,11,15\}\right\}\right),\quad 0\le i\le28.
+\end{equation}
+All 29 integer equations are verified in the supplied \texttt{PATCH\_29\_MEX\_TABLE.csv}, generated by \texttt{verify\_no64.py}. Consequently the recurrence holds at every index in $[c,c+28]$ for \emph{all} eligible $c$, not merely for tested numerical instances.
+
+Read directly from $B$, $D$, and the alternating blocks the global properties
+\begin{equation}\label{invariants}
+ f(j)\ne0\quad\text{for odd }j\ge29,\qquad
+ f(j)\ne1\quad\text{for even }j\ge30.
+\end{equation}
+Indeed, the finitely many exceptional indices in $B$ are covered by~\eqref{base-invariants}; in $D$ all even offsets $i$ have nonzero values, and no odd offset has value $1$. The other two parts of $f$ alternate with parity.
+
+For even $n\ge c+29$, the predecessor indices $n-5,n-11,n-15,n-c$ are all odd and at least $29$. By~\eqref{invariants}, their values exclude zero, so their mex is $0=f(n)$.
+
+For odd $n\ge c+29$, necessarily $n\ge c+30$. All four predecessor indices are even and at least $30$, so by~\eqref{invariants} none has value $1$. Furthermore, $n-5$ is an even index at least $c+25$. Both even indices $c+25,c+27$ have value $0$ by~\eqref{blocks}, and all later even indices lie in the alternating suffix and have value $0$. Hence $f(n-5)=0$, making the mex exactly $1=f(n)$.
+
+We have proved the recurrence at all indices. Uniqueness in~\eqref{rec} implies $f=\SG_c$. Its suffix from $T=c+29$ is nonconstant alternating and hence has least period $2$. The preceding value $f(c+28)=D_{28}=3$, while all values from $T$ onward belong to $\{0,1\}$. Any period $q\ge1$ starting before $T$ would force $f(c+28)=f(c+28+q)$, which is impossible. Therefore $T=c+29$ is the least preperiod for \emph{any} eventual period.
+\end{proof}
+
+\section{Finite certificates for the remaining 21 values}
+\begin{proof}[Proof of Theorem~\ref{main}(ii)]
+For each row $(c,T,p)$ of Table~\ref{smalltable}, the bundled verifier generates the true mex sequence through $N=T+p+c-1$ and checks
+\begin{equation}\label{finitechecks}
+ g(n)=g(n+p)\qquad(T\le n\le T+c-1).
+\end{equation}
+Thus repeating the block $g(T),\ldots,g(T+p-1)$ matches the finite recursion through $N$, and Lemma~\ref{finite} proves the infinite continuation. Each certificate also checks that the $p$-letter block has no proper divisor as a period. Therefore $p$ is the primitive eventual period. Finally, for every $T>0$, the exact integer check $g(T-1)\ne g(T-1+p)$ holds. Since every eventual period of a primitive $p$-periodic suffix is a multiple of $p$, an earlier start would force equality of these two values, a contradiction. When $T=0$ minimality is immediate. The reproducible certificate table records the tested range, the boundary values and each primitive word. This proves both least parameters for every case.
+\end{proof}
+
+\section{Scope, prior art, and a separate conjecture}
+The base three-move family is not a new result: Ho~\cite{Ho}, Theorem~5, proves least preperiod $2a^2-a-1$ and eventual period $2$ for odd $a\ge5$ and $\{a,2a+1,3a\}$, giving $(T,p)=(44,2)$ at $a=5$. Lemma~\ref{base} independently verifies the explicit finite prefix and the parity exclusions needed here; it does not claim priority for the base-family periodicity.
+
+Zhang~\cite{Zhang}, Remark~7, records bounded computations for the broader four-move family $\{a,2a+1,3a,c\}$ with odd $a,c$, $3\le a\le25$ and $c<500$, including period $2$ in generic cases, the pure-periodic branch $c=4a+1$, and exceptional branches $c=(4i+2)a-1$. In particular, $c=21$ with $(T,p)=(0,26)$ and $c=29$ with $(T,p)=(36,20)$ at $a=5$ agree with those earlier observations; these numerical observations are not new. For the seven finite cases $c=45,47,\ldots,57$, Table~\ref{smalltable} also gives $T=c+29$; the full displayed word~\eqref{mainword}, however, is asserted uniformly only for $c\ge59$. A separate finite computation also agrees with that word at $c=49$; this does not extend the analytical proof's parameter range.
+
+Flammenkamp's original dissertation~\cite{Flammenkamp} was obtained and directly compared in relevant chapters, general theorems, and its numbered four-move families; no direct anticipation of the present statement was identified in that examination. The separately published expanded 1997 book edition (ISBN 3-932136-10-1) was not obtained or directly checked. Moriwaki~\cite{Moriwaki}, Theorems~2 and~4, require successive move gaps not to exceed the least move. For $\{5,11,15,c\}$ the gap $11-5=6>5$ rules out direct application. Theorem~4 also describes augmenting an eligible base set by moves $s_1+s_r,2s_1+s_r,\ldots$; an eligible base subset of an all-odd target cannot produce this target as a nontrivial augmentation because its first new move would be even. This only rules out \emph{direct application} of the cited theorems, not every possible consequence or other related work.
+
+The prospective contribution is the complete nim-word for odd $c\ge59$, an all-$c$ proof for the fixed $a=5$ slice, and sharp preperiod classification. Historical novelty remains \textbf{INCONCLUSIVE}; no priority claim or human peer-review claim is made. An external AI reviewer reported proof and computation PASS within the reviewed scope, but this is not a formal proof certificate or human peer review.
+
+Numerical exploration suggests the \emph{unproved} wider conjecture that for odd $a\ge3$ and all sufficiently large odd $c>3a$, the least parameters for $\{a,2a+1,3a,c\}$ are
+\[
+ T_c=c+2a^2-4a-1,\qquad p_c=2.
+\]
+Checks for $a=3,5,\ldots,27$ do not establish an all-$a$ theorem. The present theorem concerns \emph{only} $a=5$. 
+
+\paragraph{Disclosure.} AI-assisted mathematical research, with reproducibility code. This is an unrefereed public preprint, version 1.0. Copyright \copyright\ 2026 Ryutaro Yonezu; all rights reserved. Human peer review: not performed.
+\begin{thebibliography}{9}
+\bibitem{Zhang} S.~Zhang, ``On the linearity of the periods of subtraction games,'' \emph{Theoretical Computer Science} \textbf{985} (2024), 114350. \href{https://doi.org/10.1016/j.tcs.2023.114350}{doi:10.1016/j.tcs.2023.114350}; author-posted revision, 30 July 2025, Remark 7.
+\bibitem{CairnsHo} G.~Cairns and N.~B.~Ho, ``Ultimately bipartite subtraction games,'' \emph{Australasian Journal of Combinatorics} \textbf{48} (2010), 213--220.
+\bibitem{Ho} N.~B.~Ho, ``On the expansion of three-element subtraction sets,'' \emph{Theoretical Computer Science} \textbf{582} (2015), 35--47, Theorem~5. \href{https://doi.org/10.1016/j.tcs.2015.03.025}{doi:10.1016/j.tcs.2015.03.025}.
+\bibitem{Flammenkamp} A.~Flammenkamp, \emph{Lange Perioden in Subtraktions-Spielen}, dissertation, Universit\"at Bielefeld (submitted November 1996; often cited as 1997). Original author-hosted source: \url{https://wwwhomes.uni-bielefeld.de/achim/diss.ps.gz}. Separately expanded book edition (1997), ISBN 3-932136-10-1, not checked.
+\bibitem{Moriwaki} Y.~Moriwaki, ``Subtraction Nim with Continuous Parameters,'' arXiv:2606.11658v1 (2026), Theorems~2 and~4. \url{https://arxiv.org/abs/2606.11658}.
+\end{thebibliography}
+\end{document}
