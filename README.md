@@ -85,3 +85,10 @@ The 12 original files are retained unchanged privately. The public computational
 - [Concept DOI: 10.5281/zenodo.24134831](https://doi.org/10.5281/zenodo.24134831)
 
 DOI links were added to main after the deposit; v1.0 assets retain the checksums above.
+
+## Author correspondence (metadata update, 2026-11-12)
+
+**Ryutaro Yonezu — Independent Researcher**  
+Research correspondence: **yonezaemon1+research@gmail.com**
+
+This contact-information addition does not revise any mathematical claims, frozen verification files, published preprint PDF, release assets, DOI, or existing SHA256 checksums.
